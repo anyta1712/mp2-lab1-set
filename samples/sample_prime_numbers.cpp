@@ -89,6 +89,12 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
+  //TBitField bf(16);
+  //bf.SetBit(3);
+  //cout << bf;
+
+
+
 }
 
 #endif
