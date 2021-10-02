@@ -1,7 +1,7 @@
 #include "tset.h"
 
 #include <gtest.h>
-/*
+
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;
@@ -112,7 +112,7 @@ TEST(TSet, can_assign_set_of_greater_size)
 
 TEST(TSet, can_assign_set_of_less_size)
 {
-  const int size1 = 6, size2 = 4;
+	const int size1 = 6, size2 = 4;
   TSet set1(size1), set2(size2);
   // set1 = {1, 3, 5}
   set1.InsElem(1);
@@ -295,4 +295,3 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
-*/

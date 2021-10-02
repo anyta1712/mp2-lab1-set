@@ -13,12 +13,7 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
-    if (len < 0) 
-    {
-        //throw len;
-        throw  "Error.The wrong size of lenth (< 0) .";
-    }
-        //throw len;// "Error.The wrong size of lenth (< 0) .";
+    if (len < 0) throw  "Error.The wrong size of lenth (< 0) .";
     BitLen = len;
     if (BitLen % 32 == 0) { MemLen = BitLen / 32; }
     else { MemLen = BitLen / 32 + 1; }
@@ -169,17 +164,19 @@ TBitField TBitField::operator~(void) // отрицание
 {
     int len = BitLen;
     TBitField temp(len);
-    for (int i = 0; i < MemLen-1; i++) {
+    for (int i = 0; i < MemLen - 1; i++) {
         temp.pMem[i] = ~pMem[i];
+       
     }
     for (int i = (MemLen - 1)*32; i < BitLen; i++) {
-        if (!GetBit(i))
+        if (!GetBit(i)) {
             temp.SetBit(i);
+            (*this).pMem[i] = (*this).pMem[i] & temp.pMem[i];
+        }
+     
     }
- 
     return temp;
 }
-
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
