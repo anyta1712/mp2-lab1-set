@@ -12,7 +12,7 @@ static const int FAKE_INT = -1;
 static TBitField FAKE_BITFIELD(1);
 static TSet FAKE_SET(1);
 
-TSet::TSet(int mp) : BitField(mp) {mp = MaxPower;}
+TSet::TSet(int mp) : BitField(mp), MaxPower(mp){}
 // конструктор копирования
 TSet::TSet(const TSet &s) : BitField(s.BitField),MaxPower(s.MaxPower){}
 // конструктор преобразования типа
@@ -30,7 +30,7 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    return(BitField.GetBit(Elem));
+    return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
@@ -64,10 +64,8 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    return (BitField |  s.BitField);
-    /*TSet a(BitField);
-    a.InsElem(s);
-    return a;*/
+    return (BitField|s.BitField);
+   
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
