@@ -15,21 +15,21 @@ TBitField::TBitField(int len)
 {
     if (len < 0) throw  "Error.The wrong size of lenth (< 0) .";
     BitLen = len;
-    //if (BitLen % 32 == 0) { MemLen = BitLen / 32; }
-    //else { MemLen = BitLen / 32 + 1; }
-    MemLen= BitLen /(sizeof(int)*8)+1;
+    if (BitLen % 32 == 0) { MemLen = BitLen / 32; }
+    else { MemLen = BitLen / 32 + 1; }
+    //MemLen= BitLen /(sizeof(int)*8)+1;
     pMem = new TELEM[MemLen];
     for (int i = 0; i < MemLen; i++) {
         pMem[i] = 0;
     }
 }
 
-TBitField::TBitField(const TBitField &bf) // конструктор копирования
+TBitField::TBitField(const TBitField& bf) // конструктор копирования
 {
-    if (BitLen < 0) throw "Error.The wrong size of lenth (< 0) .";
+   // if (BitLen<0) throw "Error.The wrong size of lenth (< 0) .";
     BitLen = bf.BitLen;
     MemLen = bf.MemLen;
-    pMem = new TELEM[MemLen];
+    pMem = new TELEM [MemLen];
     for (int i = 0; i < MemLen; i++) {
         pMem[i] = bf.pMem[i];
     }
@@ -166,7 +166,7 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 
-  /* {
+   {
    int len = BitLen;
     TBitField temp(len);
     for (int i = 0; i < MemLen - 1; i++) {
@@ -176,19 +176,12 @@ TBitField TBitField::operator~(void) // отрицание
     for (int i = (MemLen - 1)*(sizeof(int)*8); i < BitLen; i++) {
         if (!GetBit(i)) {
             temp.SetBit(i);
-            (*this).pMem[i] = (*this).pMem[i] & temp.pMem[i];
         }
-
     }
     return temp;
-}*/
-{
-    for (int i = 0; i < BitLen; i++)
-    {
-        pMem[GetMemIndex(i)] ^= GetMemMask(i);
-    }
-    return *this;
 }
+
+
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
@@ -210,3 +203,4 @@ ostream& operator<<(ostream& ostr, const TBitField& bf)//вывод
     }
     return ostr;
 }
+
