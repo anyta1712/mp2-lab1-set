@@ -87,7 +87,7 @@ TEST(TBitField, throws_when_clear_bit_with_negative_index)
 {
   TBitField bf(10);
 
-  ASSERT_ANY_THROW(bf.ClrBit(-3));
+  ASSERT_ANY_THROW(bf.ClrBit(-3));//выбрасывает любое исключение ,assert no throw -не должно быть искл
 }
 
 TEST(TBitField, throws_when_clear_bit_with_too_large_index)
